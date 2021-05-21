@@ -1,5 +1,18 @@
+
 .App {
   text-align: center;
+}
+
+.App{
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  overflow: auto;
+  align-items: center;
+  justify-content: center;
+  background-image: linear-gradient(to right top,#051937,#004d7a,#008793,#00bf72,#a8eb12); 
 }
 
 .App-logo {

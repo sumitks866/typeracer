@@ -1,23 +1,22 @@
-import logo from './logo.svg';
+import {useEffect} from 'react';
 import './App.css';
+import Welcome from './Welcome';
+import Typeracer from './Typeracer'
+import Scoreboard from './Scoreboard'
+
+import {Route,Switch} from 'react-router-dom'
 
 function App() {
+  useEffect(()=>{
+    document.title = 'Typeracer'
+  },[])
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+     <Switch>
+      <Route exact path="/" render={()=><Welcome/>}/>
+      <Route exact path="/playground" render={()=><Typeracer/>}/>
+      <Route exact path="/scoreboard" render={(routeProps)=><Scoreboard {...routeProps}/>}/>
+     </Switch>
     </div>
   );
 }
