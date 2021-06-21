@@ -8,7 +8,10 @@ export default function Welcome() {
       <div className='typeracer-text'>
         <h1>TypeRacer</h1>
       </div>
-      <Link to={`/playground`} className='welcome-enter-btn'>Play</Link>
+     <div style={{marginRight:'2rem'}}>
+      <Link to={`/playground`} className='welcome-enter-btn'>Practice</Link>
+      <Link to={`/joinroom`} className='welcome-enter-btn'>Compete</Link>
+     </div>
     </div>
   )
 

@@ -1,0 +1,25 @@
+.racer {
+  margin-top: 10px;
+  color: white;
+}
+
+.length {
+  height: 0.3rem;
+  width: auto;
+  border-radius: 10px;
+  background-color: rgb(24, 59, 175);
+}
+
+.length-covered {
+  height: 100%;
+  border-radius: 10px;
+  background: rgb(38, 190, 24);
+  /* background: rgb(255, 121, 44); */
+} 
+
+.stats{
+  height: auto;
+  width: 60px;
+  border-radius: 10px;
+  background-color: rgba(0,0, 0,0.4);
+}

@@ -1,13 +1,32 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import querystring from 'query-string'
 import {Link} from 'react-router-dom'
 import './Scoreboard.css'
+import {socket} from './global/socket'
 
 export default function Scoreboard(props) {
   const parsed = querystring.parse(props.location.search)
-  const speed = parsed['speed'], accuracy = parsed['accuracy'], time = parsed['time']
-  
-  console.log(time,speed)
+  const speed = parsed['speed'], accuracy = parsed['accuracy'], time = parsed['time'], fromRace = parsed['fromRace'] === 'true'
+
+ 
+
+  function handleOnHomeClick() {
+   if(fromRace) {
+    let user = {}
+    if(sessionStorage.getItem('username')){
+      user.username = sessionStorage.getItem('username')
+      user.roomID = sessionStorage.getItem('roomID')
+      user.socketID = sessionStorage.getItem('socketID')
+      //console.log('getting data from session storage',user)
+    }
+    if(user) {
+      socket.emit('exit-race',user)
+      sessionStorage.clear()
+    }
+
+   }
+  }
+
   return (
     <div className='score-board'>
       <div className='score-board-params'>
@@ -27,9 +46,9 @@ export default function Scoreboard(props) {
     </div>
   </div>
   <div className='score-board-icons'>
-    <Link to={`/`}><i className="fa fa-home fa-2x"/></Link>
-    <Link to={`/playground`}><i className="fas fa-redo fa-2x"/> </Link>
-    {/* <i className="fas fa-redo fa-2x" onClick={()=>{setGameOn(true)}}></i> */}
+    <Link to={`/`}><i className="fa fa-home fa-2x" onClick={handleOnHomeClick}/></Link>
+    { fromRace? <Link to={`/racetrack`}><i className="fas fa-redo fa-2x"/> </Link>
+      :<Link to={`/playgrounds`}><i className="fas fa-redo fa-2x"/> </Link>}
   </div>
  </div>
   )

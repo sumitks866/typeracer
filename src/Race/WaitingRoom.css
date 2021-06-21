@@ -1,0 +1,31 @@
+/* .waiting-room {
+  border-radius: 10px;
+  margin: auto;
+  margin-top: 2rem;
+  width: 50%;
+  height: auto;
+  color: aliceblue;
+  font-size: xx-large;
+  font-weight: 700;
+  background: rgba(68, 195, 199, 0.3);
+  padding: 2rem;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+ */
+
+.ready-btn {
+  margin-top: 4rem;
+  color: white;
+  font-size: large;
+  background-color: rgba(25, 25, 131, 0.5);
+  padding:0.5rem 1rem 0.5rem 1rem;
+  font-weight: 500;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 5px 8px;
+  border: none;
+  outline: none;
+}
+
+.ready-btn:hover {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}

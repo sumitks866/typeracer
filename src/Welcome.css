@@ -45,6 +45,7 @@
   color: rgb(0, 0, 0);
   background: rgb(163, 233, 72);
   box-shadow: 4px 7px 3px 0px;
+  margin-left: 3rem;
 }
 
 .welcome-enter-btn:hover {

@@ -12,6 +12,10 @@ code {
     monospace;
 }
 
+button {
+  cursor: pointer;
+}
+
 i {
   display: inline-block;
   padding: 0 2rem 0 2rem;

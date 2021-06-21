@@ -1,0 +1,35 @@
+.racetrack {
+  border-radius: 10px;
+  margin: auto;
+  margin-top: 2rem;
+  width: 50%;
+  height: auto;
+  background: rgba(240, 102, 245, 0.4);
+  padding: 2rem;
+  padding-top: 1rem;
+  padding-bottom: 1.5rem;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.exit-wrapper {
+  height: auto;
+  width: fit-content;
+  margin: 0 auto;
+  margin-top: 1rem;
+}
+
+.exit-wrapper button {
+  background-color: rgb(219, 79, 79);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  color: white;
+  font-size: large;
+  font-weight: 600;
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  cursor: pointer;;
+}
+.exit-wrapper button  :hover {
+  box-shadow: none;
+}

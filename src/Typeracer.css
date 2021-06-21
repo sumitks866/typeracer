@@ -1,18 +1,4 @@
-.typeracer {
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  overflow: auto;
-  align-items: center;
-  justify-content: center;
-}
-
 .typeracer-playground {
-  display: flexbox;
-  align-items: center;
-  justify-content: center;
   border-radius: 10px;
   margin: auto;
   margin-top: 2rem;
@@ -24,10 +10,11 @@
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 .params {
-  margin-bottom: 50px;
+  margin-bottom: 20px;
 }
 .params h3 {
   margin: 0;
+  font-size: medium;
   font-weight: 400;
   color: rgb(255, 255, 255);
 }
@@ -86,8 +73,6 @@
     opacity: 0;
   }
 }
-
-
 
 .exit-btn {
   padding: 0.3em 1em 0.3em 1em;

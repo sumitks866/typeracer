@@ -1,16 +1,16 @@
 import React, {useState,useEffect} from 'react'
-import {Link,Redirect} from 'react-router-dom'
 import axios from 'axios'
 import  './Typeracer.css'
-import {socket} from './global/socket'
+import {Link, Redirect} from 'react-router-dom'
 
-export default function Typeracer(props) {
+export default function TyperacerSolo() {
   
   const [quote, setQuote] = useState('')
   const [input, setInput] = useState('')
+  // const [word, setWord] = useState('')
   const [target, setTarget] = useState([{}])
   const [isLoading, setIsLoading] = useState(true)
-  const [gameOver, setGameOver] = useState(true)
+  const [gameOn, setGameOn] = useState(true)
   const [correct, setCorrect] = useState(true)
   const [timer, setTimer] = useState(0)
   const [speed, setSpeed] = useState(0)
@@ -29,74 +29,52 @@ export default function Typeracer(props) {
     setLetterCount(0)
   }
 
-  function getLength() {
-    if(quote.length === 0)
-      return 0
-
-    let len = 0;
-    for(len=0;len<input.length && len<quote.length;len++) {
-      if(input[len] !== quote[len]) {
-        break
-      }
-    }
-    return parseInt(len*100/quote.length)
-  }
-  
   useEffect(()=>{
-    console.log('quote from server:',props)
     initializeStates()
     async function getQuoteAndGameOn(){
-        let respQuote = props.quote
-        if(!respQuote){
-          const response = await axios.get('http://api.quotable.io/random')
-          respQuote = response.data.content
-        }        
-        setQuote(respQuote)
-      }
-    getQuoteAndGameOn()
-       
-  },[])
-
-  useEffect(()=>{
-    let quoteArray = quote.split('')
-    let chars = quoteArray.map((char)=>{
+        console.log('getQuote called')
+        const response = await axios.get('http://api.quotable.io/random')
+        setQuote(response.data.content)
+        let quoteArray = response.data.content.split('')
+        let chars = quoteArray.map((char)=>{
           return {char:char,color:'white'}
         })
-    setTarget(chars)
-  },[quote])
+        console.log(response.data.content)
+        setTarget(chars)
+        setIsLoading(false)
+        setInput('')
+        setTimer(0)
+      }
+      getQuoteAndGameOn()
+    },[]
+  )
 
   useEffect(()=>{
-    setIsLoading(false)
-    setInput('')
-    setTimer(0)
-  },[target])
-
-  useEffect(()=>{
-    let interval = null    
-
-    if(gameOver) {
+    let interval = null
+    if(gameOn) {
       interval = setInterval(() => {
         setTimer(timer+1)
       }, 1000);
-    } else if(!gameOver && timer !== 0) {
+    } else if(!gameOn && timer !== 0) {
       clearInterval(interval)
     }
     return () => clearInterval(interval);
-  },[gameOver,timer])
+  },[gameOn,timer])
   
   useEffect(()=>{ 
     if(input.length > target.length) {
       return ;
     }
-
     let newTarget = target
     for(let i=input.length;i<target.length ;i++) {
       target[i].color = 'white'
     } 
+
     if(input.length === 0) {
       setTarget(newTarget)
       return ;
     }
+
     if(input !== quote.substring(0,input.length)) {
       setCorrect(false)
       newTarget[input.length-1].color = '#ff8787'
@@ -105,12 +83,9 @@ export default function Typeracer(props) {
       setSpeed(speed)
       setCorrect(true)
       newTarget[input.length-1].color = '#adff4f'
-      const length = getLength()
-      if(length) {
-        socket.emit('update',{...props,length,speed})
-      }
     }
     setTarget(newTarget)
+
   },[input])
   
   function getCorrectLetters() {
@@ -123,16 +98,6 @@ export default function Typeracer(props) {
     return res;
   }
 
-  if(!gameOver) {
-    let url = `/scoreboard?speed=${speed}&accuracy=${accuracy}&time=${timer}`
-    if(props.quote) {
-      url = url + '&fromRace=true'
-    } else {
-      url = url + '&fromRace=false'
-    }
-    return (<Redirect to={url}/>)
-  }
-
   function handleChange(evt) {
     
     let newLetterCount = letterCount+1
@@ -142,7 +107,7 @@ export default function Typeracer(props) {
     setAccuracy(newAccuracy)
 
     if(input.trim() === quote.trim()) {
-      setGameOver(false)
+      setGameOn(false)
     }
   }
 
@@ -150,6 +115,10 @@ export default function Typeracer(props) {
     evt.preventDefault()
   }
 
+  if(!gameOn) {
+    const url = `/scoreboard?speed=${speed}&accuracy=${accuracy}&time=${timer}`
+    return (<Redirect to={url}/>)
+  }
 
   return isLoading?(
     <div className='typeracer-loading'>
@@ -177,8 +146,7 @@ export default function Typeracer(props) {
             style={{color:correct?'green':'#d12c2c'}} />
         </form>
       </div>
-      {/* <Link to={`/`} style={{ textDecoration: 'none' }}><i className="fa fa-home fa-2x"></i></Link> */}
+      <Link to={`/`} style={{ textDecoration: 'none' }}><i className="fa fa-home fa-2x"></i></Link>
     </div>
   )
 }
-
