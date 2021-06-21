@@ -47,8 +47,7 @@ export default function Scoreboard(props) {
   </div>
   <div className='score-board-icons'>
     <Link to={`/`}><i className="fa fa-home fa-2x" onClick={handleOnHomeClick}/></Link>
-    { fromRace? <Link to={`/racetrack`}><i className="fas fa-redo fa-2x"/> </Link>
-      :<Link to={`/playgrounds`}><i className="fas fa-redo fa-2x"/> </Link>}
+    {/* <Link to={`/racetrack`}><i className="fas fa-redo fa-2x"/> </Link> */}
   </div>
  </div>
   )

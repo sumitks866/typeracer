@@ -9,7 +9,6 @@ export default function Welcome() {
         <h1>TypeRacer</h1>
       </div>
      <div style={{marginRight:'2rem'}}>
-      <Link to={`/playground`} className='welcome-enter-btn'>Practice</Link>
       <Link to={`/joinroom`} className='welcome-enter-btn'>Compete</Link>
      </div>
     </div>
